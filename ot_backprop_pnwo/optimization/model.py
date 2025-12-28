@@ -70,7 +70,7 @@ class Path2VariantProbabilityModel(tf.keras.Model):
 class Path2VariantModelFactory:
 
     @staticmethod
-    def init_configuration_with_default(w_transitions_init:  Union[npt.NDArray[np.float_], None]=None, 
+    def init_configuration_with_default(w_transitions_init:  Union[npt.NDArray[np.float64], None]=None, 
                                 nbr_transitions: Union[int, None]=None, 
                                 anticipate_path_prob_residual: bool=True,
                                 residual_handling: ResidualHandling=ResidualHandling.ADD_RESIDUAL_ELEMENT,
@@ -79,7 +79,7 @@ class Path2VariantModelFactory:
         """ Factory methods that instantiates a paths to variants' probability model based on a confiuration name using default parameters if that configuration uses parameters
 
         Args:
-            w_transitions_init (npt.NDArray[np.float_]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
+            w_transitions_init (npt.NDArray[np.float64]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
             nbr_transitions (int|None): Number of transitions. Either it is specified or hot start initialization must be provided. Default to None.
             anticipate_path_prob_residual (bool): Anticipate that there might be residual probability on the side of the path sample. EMD assumes equal weight for both sides; thus, the residual with probability 1 - (sum of probability of paths) needs to be handled. Defaults to True.
             residual_handling (ResidualHandling): In case there is residual probability mass for the paths, this defines how it is handled. Defaults to adding a residual path.
@@ -101,7 +101,7 @@ class Path2VariantModelFactory:
             raise Exception("Unkown path-to-variant layer type")
 
     @staticmethod
-    def init_base_model_abs(w_transitions_init:  Union[npt.NDArray[np.float_], None]=None, 
+    def init_base_model_abs(w_transitions_init:  Union[npt.NDArray[np.float64], None]=None, 
                                 nbr_transitions: Union[int, None]=None, 
                                 anticipate_path_prob_residual: bool=True,
                                 residual_handling: ResidualHandling=ResidualHandling.ADD_RESIDUAL_ELEMENT
@@ -109,7 +109,7 @@ class Path2VariantModelFactory:
         """ Factory methods that instantiates a paths to variants' probability model that uses ABSOLUTE transition weights to ensure their non-negativity
 
         Args:
-            w_transitions_init (npt.NDArray[np.float_]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
+            w_transitions_init (npt.NDArray[np.float64]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
             nbr_transitions (int|None): Number of transitions. Either it is specified or hot start initialization must be provided. Default to None.
             anticipate_path_prob_residual (bool): Anticipate that there might be residual probability on the side of the path sample. EMD assumes equal weight for both sides; thus, the residual with probability 1 - (sum of probability of paths) needs to be handled. Defaults to True.
             residual_handling (ResidualHandling): In case there is residual probability mass for the paths, this defines how it is handled. Defaults to adding a residual path.
@@ -119,7 +119,7 @@ class Path2VariantModelFactory:
         return path_variant_model
     
     @staticmethod
-    def init_base_model_barrier_reg(w_transitions_init:  Union[npt.NDArray[np.float_], None]=None,
+    def init_base_model_barrier_reg(w_transitions_init:  Union[npt.NDArray[np.float64], None]=None,
                                         nbr_transitions: Union[int, None]=None, 
                                         anticipate_path_prob_residual: bool=True,
                                         residual_handling: ResidualHandling=ResidualHandling.ADD_RESIDUAL_ELEMENT,
@@ -129,7 +129,7 @@ class Path2VariantModelFactory:
         """ Factory methods that instantiates a paths to variants' probability model that adds log barrier loss terms and weight regularization to ensure non-negative (and bounded) transition weights.
 
         Args:
-            w_transitions_init (npt.NDArray[np.float_]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
+            w_transitions_init (npt.NDArray[np.float64]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
             nbr_transitions (int|None): Number of transitions. Either it is specified or hot start initialization must be provided. Default to None.
             anticipate_path_prob_residual (bool): Anticipate that there might be residual probability on the side of the path sample. EMD assumes equal weight for both sides; thus, the residual with probability 1 - (sum of probability of paths) needs to be handled. Defaults to True.
             residual_handling (ResidualHandling): In case there is residual probability mass for the paths, this defines how it is handled. Defaults to adding a residual path.
@@ -147,7 +147,7 @@ class Path2VariantModelFactory:
         return path_variant_model
 
     @staticmethod
-    def init_base_model_clip(w_transitions_init:  Union[npt.NDArray[np.float_], None]=None,
+    def init_base_model_clip(w_transitions_init:  Union[npt.NDArray[np.float64], None]=None,
                                     nbr_transitions: Union[int, None]=None, 
                                     anticipate_path_prob_residual: bool=True,
                                     residual_handling: ResidualHandling=ResidualHandling.ADD_RESIDUAL_ELEMENT,
@@ -156,7 +156,7 @@ class Path2VariantModelFactory:
         """ Factory methods that instantiates a paths to variants' probability model that clips transition weights to ensure their non-negativity.
 
         Args:
-            w_transitions_init (npt.NDArray[np.float_]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
+            w_transitions_init (npt.NDArray[np.float64]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
             nbr_transitions (int|None): Number of transitions. Either it is specified or hot start initialization must be provided. Default to None.
             anticipate_path_prob_residual (bool): Anticipate that there might be residual probability on the side of the path sample. EMD assumes equal weight for both sides; thus, the residual with probability 1 - (sum of probability of paths) needs to be handled. Defaults to True.
             residual_handling (ResidualHandling): In case there is residual probability mass for the paths, this defines how it is handled. Defaults to adding a residual path.
@@ -175,7 +175,7 @@ class Path2VariantModelFactory:
         return path_variant_model
 
     @staticmethod
-    def init_log_model_abs(w_transitions_init:  Union[npt.NDArray[np.float_], None]=None, 
+    def init_log_model_abs(w_transitions_init:  Union[npt.NDArray[np.float64], None]=None, 
                                 nbr_transitions: Union[int, None]=None, 
                                 anticipate_path_prob_residual: bool=True,
                                 residual_handling: ResidualHandling=ResidualHandling.ADD_RESIDUAL_ELEMENT
@@ -185,7 +185,7 @@ class Path2VariantModelFactory:
         The model employs a exp(log(...)) trick to the paths' probability computation to make it more robust and faster (avoid product rule).
 
         Args:
-            w_transitions_init (npt.NDArray[np.float_]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
+            w_transitions_init (npt.NDArray[np.float64]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
             nbr_transitions (int|None): Number of transitions. Either it is specified or hot start initialization must be provided. Default to None.
             anticipate_path_prob_residual (bool): Anticipate that there might be residual probability on the side of the path sample. EMD assumes equal weight for both sides; thus, the residual with probability 1 - (sum of probability of paths) needs to be handled. Defaults to True.
             residual_handling (ResidualHandling): In case there is residual probability mass for the paths, this defines how it is handled. Defaults to adding a residual path.
@@ -196,7 +196,7 @@ class Path2VariantModelFactory:
         return path_variant_model
 
     @staticmethod
-    def init_log_model_clip(w_transitions_init:  Union[npt.NDArray[np.float_], None]=None,
+    def init_log_model_clip(w_transitions_init:  Union[npt.NDArray[np.float64], None]=None,
                                 nbr_transitions: Union[int, None]=None, 
                                 anticipate_path_prob_residual: bool=True,
                                 residual_handling: ResidualHandling=ResidualHandling.ADD_RESIDUAL_ELEMENT,
@@ -207,7 +207,7 @@ class Path2VariantModelFactory:
         The model employs a exp(log(...)) trick to the paths' probability computation to make it more robust and faster (avoid product rule).
 
         Args:
-            w_transitions_init (npt.NDArray[np.float_]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
+            w_transitions_init (npt.NDArray[np.float64]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
             nbr_transitions (int|None): Number of transitions. Either it is specified or hot start initialization must be provided. Default to None.
             anticipate_path_prob_residual (bool): Anticipate that there might be residual probability on the side of the path sample. EMD assumes equal weight for both sides; thus, the residual with probability 1 - (sum of probability of paths) needs to be handled. Defaults to True.
             residual_handling (ResidualHandling): In case there is residual probability mass for the paths, this defines how it is handled. Defaults to adding a residual path.
@@ -224,7 +224,7 @@ class Path2VariantModelFactory:
         return path_variant_model
 
     @staticmethod
-    def init_log_domain_model(w_transitions_init:  Union[npt.NDArray[np.float_], None]=None,
+    def init_log_domain_model(w_transitions_init:  Union[npt.NDArray[np.float64], None]=None,
                                 nbr_transitions: Union[int, None]=None, 
                                 anticipate_path_prob_residual: bool=True,
                                 residual_handling: ResidualHandling=ResidualHandling.ADD_RESIDUAL_ELEMENT,
@@ -236,7 +236,7 @@ class Path2VariantModelFactory:
         Querying the weights returns the exponentiated current transition weights. 
 
         Args:
-            w_transitions_init (npt.NDArray[np.float_]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
+            w_transitions_init (npt.NDArray[np.float64]|None): Initialization weights for transitions. Either it is specified or the number of transitions must be provided. Default to None.
             nbr_transitions (int|None): Number of transitions. Either it is specified or hot start initialization must be provided. Default to None.
             anticipate_path_prob_residual (bool): Anticipate that there might be residual probability on the side of the path sample. EMD assumes equal weight for both sides; thus, the residual with probability 1 - (sum of probability of paths) needs to be handled. Defaults to True.
             residual_handling (ResidualHandling): In case there is residual probability mass for the paths, this defines how it is handled. Defaults to adding a residual path.

@@ -11,7 +11,7 @@ class Path2VariantProbabilityLayer(tf.keras.layers.Layer):
     MIN_INITIAL_TRANSITION_WEIGHT = 0.00001
 
     def __init__(self, 
-                 w_transitions_init: Union[npt.NDArray[np.float_], None]=None,
+                 w_transitions_init: Union[npt.NDArray[np.float64], None]=None,
                  nbr_transitions: Union[int, None]=None,
                  tw_clip_min: Union[int, None]=None, 
                  tw_clip_max=None,
@@ -34,7 +34,7 @@ class Path2VariantProbabilityLayer(tf.keras.layers.Layer):
         #self.trainable_variables.extend([self.w_transitions])
 
     def _init_transition_weights(self,
-                                 w_transitions_init: Union[npt.NDArray[np.float_], None]=None,
+                                 w_transitions_init: Union[npt.NDArray[np.float64], None]=None,
                                  nbr_transitions: Union[int, None]=None,
                                  tw_clip_min: Union[int, None]=None, tw_clip_max=None):
 
@@ -71,7 +71,7 @@ class Path2VariantProbabilityLayer(tf.keras.layers.Layer):
     def _get_tw_initializer(self):
         return tf.random_uniform_initializer(minval=0.25, maxval=1.75)
 
-    def _adapted_hot_start_weight_initializer(self, w_transitions_init: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def _adapted_hot_start_weight_initializer(self, w_transitions_init: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         # Ensure that transition weights are non-zero
         w_transitions_init = np.where(w_transitions_init > 0, w_transitions_init, Path2VariantProbabilityLayer.MIN_INITIAL_TRANSITION_WEIGHT)
         # Avoid huge weights
@@ -90,7 +90,7 @@ class Path2VariantProbabilityLayer(tf.keras.layers.Layer):
 
 class Path2VariantProbabilityLayerBase(Path2VariantProbabilityLayer):
 
-    def __init__(self, w_transitions_init: Union[npt.NDArray[np.float_], None],
+    def __init__(self, w_transitions_init: Union[npt.NDArray[np.float64], None],
                  nbr_transitions: Union[int, None]=None, 
                  tw_absolute: bool=False,
                  tw_log_barrier_mu: Union[float, None]=None,
@@ -184,7 +184,7 @@ class Path2VariantProbabilityLayerBase(Path2VariantProbabilityLayer):
 
 class Path2VariantProbabilityLayerLogDomain(Path2VariantProbabilityLayer):
 
-    def __init__(self, w_transitions_init: Union[npt.NDArray[np.float_], None],
+    def __init__(self, w_transitions_init: Union[npt.NDArray[np.float64], None],
                  nbr_transitions: Union[int, None]=None, 
                  log_domain: bool=False,
                  tw_absolute: bool=False,
@@ -298,7 +298,7 @@ class Path2VariantProbabilityLayerLogDomain(Path2VariantProbabilityLayer):
         return w_transitions_init
 
 
-    def _adapt_hot_start_weights(self, w_transitions_init: npt.NDArray[np.float_]) -> npt.NDArray[np.float_]:
+    def _adapt_hot_start_weights(self, w_transitions_init: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         w_transitions_init = super()._adapt_hot_start_weights(w_transitions_init)
         if self._use_log_domain_weights:
             return np.log(w_transitions_init)

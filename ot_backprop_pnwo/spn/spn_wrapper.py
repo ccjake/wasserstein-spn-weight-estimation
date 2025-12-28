@@ -26,12 +26,12 @@ class SPNWrapper:
     def export_to_file(self, path: str):
         pnml_exporter.apply(self.net, self.im, path, final_marking=self.fm)
 
-    def get_weights(self) -> npt.NDArray[np.float_]:
+    def get_weights(self) -> npt.NDArray[np.float64]:
         return np.array([t.properties['stochastic_distribution'].random_variable.weight 
                          for t in self.t_id_act_conn.tId_2_transition])
 
     @property
-    def initial_weights(self) -> npt.NDArray[np.float_]:
+    def initial_weights(self) -> npt.NDArray[np.float64]:
         return self._initial_weights
 
     @property

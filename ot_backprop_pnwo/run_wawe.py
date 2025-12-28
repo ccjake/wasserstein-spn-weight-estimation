@@ -14,7 +14,7 @@ from ot_backprop_pnwo.evaluation.evaluation_param import ConvergenceConfig
 from ot_backprop_pnwo.optimization.emsc_loss_type import EMSCLossType
 from ot_backprop_pnwo.optimization.model import Path2VariantLayerTypes
 from ot_backprop_pnwo.optimization.model import ResidualHandling
-from ot_backprop_pnwo.optimization.ot_wo_two_phase import OT_WO_Two_Phase
+from ot_wo_two_phase_single_transition import OT_WO_Two_Phase
 from ot_backprop_pnwo.spn import spn_util
 from ot_backprop_pnwo.spn.spn_wrapper import SPNWrapper
 from ot_backprop_pnwo.stochastic_language.actindexing import ActivityIDConnector

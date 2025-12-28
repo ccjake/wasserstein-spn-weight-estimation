@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 class StochasticLang:
 
     def __init__(self, act_id_connector: ActivityIDConnector, variants: list[npt.NDArray[np.int_]], 
-                 probabilities: npt.NDArray[np.float_]):
+                 probabilities: npt.NDArray[np.float64]):
         self.act_id_connector = act_id_connector
         self.variants = variants
         self.probabilities = probabilities
