@@ -146,14 +146,15 @@ class OT_WO_Two_Phase:
         self._time_full = time.time() - time_init_start
         self._logger.info(f"Initialized " + self.configuration_description)
 
-    def optimize_weights(self, optimizer, nbr_iterations_min=50, nbr_iterations_max=5000, eps_convergence=0.0025):
+    def optimize_weights(self, optimizer, target_transition_name=None, nbr_iterations_min=50, nbr_iterations_max=5000, eps_convergence=0.0025):
         self._logger.info("Running Optimization")
         time_opt_start = time.time()
         ### Phase 1
         start_time_p1 = time.time()
         train_step_phase_1 = self._create_training_regime_fixed_paths_fixed_variants(
             optimizer=optimizer,
-            data_phase_one=self._data_phase_1)
+            data_phase_one=self._data_phase_1,
+            target_transition_name=target_transition_name)
         
         nbr_iterations_max_phase_1 = nbr_iterations_max
         eps_conv_phase_1 = eps_convergence
@@ -193,7 +194,8 @@ class OT_WO_Two_Phase:
 
             train_step_phase_2 = self._create_training_flex(
                 optimizer=optimizer,
-                data_phase_2=data_phase_two)
+                data_phase_2=data_phase_two,
+                target_transition_name=target_transition_name)
             (np_trans_weights, np_error_p2) = self._run_training(train_step=train_step_phase_2, 
                                                                  nbr_iterations_min=nbr_iterations_min, 
                                                                  nbr_iterations_max=nbr_iterations_max, 
@@ -232,6 +234,39 @@ class OT_WO_Two_Phase:
 
         return (self._path_variant_model.transition_weights, np.array(error_series))
 
+    def _filter_gradients_for_single_transition(self, gradients, target_transition_name: str):
+        if target_transition_name is None:
+            return gradients
+
+        # 1. Get all transition names in the correct order
+        transition_names = [t.name for t in self._spn_container.net.transitions]
+
+        try:
+            # 2. Find the index of the target transition
+            target_index = transition_names.index(target_transition_name)
+
+            # 3. Create a "mask" tensor
+            # The transition weights are the first (and likely only) trainable variable
+            original_weight_gradients = gradients[0]
+            # First, create a mask full of zeros
+            mask = tf.zeros_like(original_weight_gradients)
+            # Then, set the value at the target index to 1.0
+            mask = tf.tensor_scatter_nd_update(mask, [[target_index]], [1.0])
+
+            # 4. Apply the mask to zero out all other gradients
+            masked_gradient = original_weight_gradients * mask
+            
+            # 5. Create the final list of gradients to be applied
+            # (This handles the case where the model might have other trainable variables)
+            final_gradients = list(gradients)
+            final_gradients[0] = masked_gradient
+            return final_gradients
+        
+        except ValueError:
+            # If the specified name is not found, proceed with normal optimization and print a warning
+            print(f"WARNING: Transition '{target_transition_name}' not found. Optimizing all weights normally.")
+            return gradients
+
     ################################################################################
     # Training Regimes:
     # Path Sample | Log Sample | Treatment
@@ -240,7 +275,7 @@ class OT_WO_Two_Phase:
     # Flex        | Fix        | V2: Cost matrix changes and variant likelihoods fixed (could distinguish but simpler to use V2 function)                       
     # Flex        | Flex       | V2: Cost matrix and variant likelihoods change 
     ################################################################################
-    def _create_training_regime_fixed_paths_fixed_variants(self, optimizer, data_phase_one: DataPhaseOne) -> Callable[[float], float]:
+    def _create_training_regime_fixed_paths_fixed_variants(self, optimizer, data_phase_one: DataPhaseOne, target_transition_name=None) -> Callable[[float], float]:
         """Training regime for FIXED path sample and FIXED log sample.
 
         Args:
@@ -269,44 +304,7 @@ class OT_WO_Two_Phase:
 
             gradients = tape.gradient(loss, model.trainable_variables)
 
-            ######################################################################
-            ##  START: Code to freeze all weights except for one transition ##
-            ######################################################################
-            
-            # 1. ----> DEFINE THE TRANSITION YOU WANT TO OPTIMIZE <----
-            target_transition_name = "t5"  # <--- REPLACE "t5" WITH THE NAME OF YOUR TRANSITION
-
-            # 2. Get all transition names in the correct order
-            transition_names = [t.name for t in self._spn_container.net.transitions]
-
-            try:
-                # 3. Find the index of the target transition
-                target_index = transition_names.index(target_transition_name)
-
-                # 4. Create a "mask" tensor
-                # The transition weights are the first (and likely only) trainable variable
-                original_weight_gradients = gradients[0]
-                # First, create a mask full of zeros
-                mask = tf.zeros_like(original_weight_gradients)
-                # Then, set the value at the target index to 1.0
-                mask = tf.tensor_scatter_nd_update(mask, [[target_index]], [1.0])
-
-                # 5. Apply the mask to zero out all other gradients
-                masked_gradient = original_weight_gradients * mask
-                
-                # 6. Create the final list of gradients to be applied
-                # (This handles the case where the model might have other trainable variables)
-                final_gradients = list(gradients)
-                final_gradients[0] = masked_gradient
-            
-            except ValueError:
-                # If the specified name is not found, proceed with normal optimization and print a warning
-                print(f"WARNING: Transition '{target_transition_name}' not found. Optimizing all weights normally.")
-                final_gradients = gradients
-            
-            ######################################################################
-            ##  END: Code to freeze weights
-            ######################################################################
+            final_gradients = self._filter_gradients_for_single_transition(gradients, target_transition_name)
 
             if clip_gradients:
                 final_gradients = [(tf.clip_by_value(grad, clip_value_min=-1.0, clip_value_max=1.0)) for grad in final_gradients]
@@ -330,7 +328,7 @@ class OT_WO_Two_Phase:
         return train_step
 
     
-    def _create_training_flex(self, optimizer, data_phase_2: DataPhaseTwo):
+    def _create_training_flex(self, optimizer, data_phase_2: DataPhaseTwo, target_transition_name=None):
         """Training regime if model or log side are flexible. 
         In loss function, we will always have to convert cost matrix from tensorflow domain to numpy, which is costly.
 
@@ -354,6 +352,8 @@ class OT_WO_Two_Phase:
                     (data_iteration.tf_variant_2_paths, data_iteration.tf_paths_nom, data_iteration.tf_paths_denom),
                     data_iteration.variant_lh, data_iteration.cost_matrix, add_extra_losses)
             
+            grads = self._filter_gradients_for_single_transition(grads, target_transition_name)
+
             if clip_gradients:
                 grads = [(tf.clip_by_value(grad, clip_value_min=-1.0, clip_value_max=1.0)) for grad in grads]
             optimizer.apply_gradients(zip(grads, model.trainable_weights))
