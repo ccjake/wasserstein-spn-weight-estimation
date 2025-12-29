@@ -1,28 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <pnml>
-  <net id="imported_1766959402.874364" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
+  <net id="imported_1766964822.2081804" type="http://www.pnml.org/version-2009/grammar/pnmlcoremodel">
     <name>
-      <text>imported_1766959402.874364</text>
+      <text>imported_1766964822.2081804</text>
     </name>
     <page id="n0">
-      <place id="sink">
+      <place id="node_e8240f33-a17e-4112-92a1-8a0cb30b8889">
         <name>
-          <text>sink</text>
-        </name>
-      </place>
-      <place id="ent_node_a5bb3754-b1d4-49ac-989b-d9a9567d023d">
-        <name>
-          <text>ent_node_a5bb3754-b1d4-49ac-989b-d9a9567d023d</text>
-        </name>
-      </place>
-      <place id="exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74">
-        <name>
-          <text>exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74</text>
-        </name>
-      </place>
-      <place id="ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857">
-        <name>
-          <text>ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857</text>
+          <text>node_e8240f33-a17e-4112-92a1-8a0cb30b8889</text>
         </name>
       </place>
       <place id="ent_node_9c4bf61d-8540-4169-9839-ab44a583b614">
@@ -30,9 +15,9 @@
           <text>ent_node_9c4bf61d-8540-4169-9839-ab44a583b614</text>
         </name>
       </place>
-      <place id="node_e8240f33-a17e-4112-92a1-8a0cb30b8889">
+      <place id="exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74">
         <name>
-          <text>node_e8240f33-a17e-4112-92a1-8a0cb30b8889</text>
+          <text>exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74</text>
         </name>
       </place>
       <place id="ent_node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861">
@@ -53,6 +38,21 @@
           <text>1</text>
         </initialMarking>
       </place>
+      <place id="sink">
+        <name>
+          <text>sink</text>
+        </name>
+      </place>
+      <place id="ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857">
+        <name>
+          <text>ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857</text>
+        </name>
+      </place>
+      <place id="ent_node_a5bb3754-b1d4-49ac-989b-d9a9567d023d">
+        <name>
+          <text>ent_node_a5bb3754-b1d4-49ac-989b-d9a9567d023d</text>
+        </name>
+      </place>
       <place id="ent_node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0">
         <name>
           <text>ent_node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0</text>
@@ -63,6 +63,18 @@
           <text>exi_node_372001f1-ec64-40e9-90a0-76327bf6ac94</text>
         </name>
       </place>
+      <transition id="node_9e66b467-3a85-4958-ba2e-5e2b4a628c2c">
+        <name>
+          <text>performed</text>
+        </name>
+        <toolspecific tool="StochasticPetriNet" version="0.2">
+          <property key="distributionType">UNIFORM</property>
+          <property key="distributionParameters">0;1</property>
+          <property key="priority">0</property>
+          <property key="invisible">false</property>
+          <property key="weight">0.32002655</property>
+        </toolspecific>
+      </transition>
       <transition id="node_04281c50-fbc3-4bb9-b6de-f780a808e1d5">
         <name>
           <text>remove document</text>
@@ -72,8 +84,21 @@
           <property key="distributionParameters">0;1</property>
           <property key="priority">0</property>
           <property key="invisible">false</property>
-          <property key="weight">0.11200496</property>
+          <property key="weight">0.47226003</property>
         </toolspecific>
+      </transition>
+      <transition id="node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861">
+        <name>
+          <text>node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861</text>
+        </name>
+        <toolspecific tool="StochasticPetriNet" version="0.2">
+          <property key="distributionType">UNIFORM</property>
+          <property key="distributionParameters">0;1</property>
+          <property key="priority">0</property>
+          <property key="invisible">true</property>
+          <property key="weight">0.54663265</property>
+        </toolspecific>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="21f7affd-83d2-423b-a5ec-0de9fdd37d8b"/>
       </transition>
       <transition id="node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0">
         <name>
@@ -84,9 +109,21 @@
           <property key="distributionParameters">0;1</property>
           <property key="priority">0</property>
           <property key="invisible">true</property>
-          <property key="weight">0.30637679</property>
+          <property key="weight">0.3281416</property>
         </toolspecific>
-        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="f03ad351-180d-4381-ab57-177db89c71d8"/>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="92b141da-e37d-446e-b40c-aa439d7c9d5c"/>
+      </transition>
+      <transition id="node_a5bb3754-b1d4-49ac-989b-d9a9567d023d">
+        <name>
+          <text>insert document</text>
+        </name>
+        <toolspecific tool="StochasticPetriNet" version="0.2">
+          <property key="distributionType">UNIFORM</property>
+          <property key="distributionParameters">0;1</property>
+          <property key="priority">0</property>
+          <property key="invisible">false</property>
+          <property key="weight">1.2082311</property>
+        </toolspecific>
       </transition>
       <transition id="node_dad7bafd-8504-442e-a0a6-6ae841522015">
         <name>
@@ -97,8 +134,34 @@
           <property key="distributionParameters">0;1</property>
           <property key="priority">0</property>
           <property key="invisible">false</property>
-          <property key="weight">0.009131033</property>
+          <property key="weight">0.032145813</property>
         </toolspecific>
+      </transition>
+      <transition id="sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da">
+        <name>
+          <text>sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da</text>
+        </name>
+        <toolspecific tool="StochasticPetriNet" version="0.2">
+          <property key="distributionType">UNIFORM</property>
+          <property key="distributionParameters">0;1</property>
+          <property key="priority">0</property>
+          <property key="invisible">true</property>
+          <property key="weight">0.16992213</property>
+        </toolspecific>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="a0011e5c-4a1a-4fad-8513-c6637af802f3"/>
+      </transition>
+      <transition id="sfl_node_828f1386-edc8-461d-928b-db841bee9636">
+        <name>
+          <text>sfl_node_828f1386-edc8-461d-928b-db841bee9636</text>
+        </name>
+        <toolspecific tool="StochasticPetriNet" version="0.2">
+          <property key="distributionType">UNIFORM</property>
+          <property key="distributionParameters">0;1</property>
+          <property key="priority">0</property>
+          <property key="invisible">true</property>
+          <property key="weight">0.8500384</property>
+        </toolspecific>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="90baf2a0-53a8-42ce-837d-6e9384e11657"/>
       </transition>
       <transition id="node_318db96c-764f-4b38-89ee-0ec27e9a4cf3">
         <name>
@@ -109,31 +172,7 @@
           <property key="distributionParameters">0;1</property>
           <property key="priority">0</property>
           <property key="invisible">false</property>
-          <property key="weight">1.0171504</property>
-        </toolspecific>
-      </transition>
-      <transition id="node_9c4bf61d-8540-4169-9839-ab44a583b614">
-        <name>
-          <text>begin editing</text>
-        </name>
-        <toolspecific tool="StochasticPetriNet" version="0.2">
-          <property key="distributionType">UNIFORM</property>
-          <property key="distributionParameters">0;1</property>
-          <property key="priority">0</property>
-          <property key="invisible">false</property>
-          <property key="weight">0.5728124</property>
-        </toolspecific>
-      </transition>
-      <transition id="node_9e66b467-3a85-4958-ba2e-5e2b4a628c2c">
-        <name>
-          <text>performed</text>
-        </name>
-        <toolspecific tool="StochasticPetriNet" version="0.2">
-          <property key="distributionType">UNIFORM</property>
-          <property key="distributionParameters">0;1</property>
-          <property key="priority">0</property>
-          <property key="invisible">false</property>
-          <property key="weight">0.30149418</property>
+          <property key="weight">0.64340025</property>
         </toolspecific>
       </transition>
       <transition id="sfl_node_3ad5d9db-744d-4f65-98aa-44f949caef36">
@@ -145,33 +184,20 @@
           <property key="distributionParameters">0;1</property>
           <property key="priority">0</property>
           <property key="invisible">true</property>
-          <property key="weight">1.0149755</property>
+          <property key="weight">1.0035785</property>
         </toolspecific>
-        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="7dae88fb-230d-4e9d-806b-22a71a90f7f6"/>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="e37c2934-4e60-4130-b5b9-804b89501a3a"/>
       </transition>
-      <transition id="node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861">
+      <transition id="node_9c4bf61d-8540-4169-9839-ab44a583b614">
         <name>
-          <text>node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861</text>
-        </name>
-        <toolspecific tool="StochasticPetriNet" version="0.2">
-          <property key="distributionType">UNIFORM</property>
-          <property key="distributionParameters">0;1</property>
-          <property key="priority">0</property>
-          <property key="invisible">true</property>
-          <property key="weight">0.5240002</property>
-        </toolspecific>
-        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="63259cd1-d023-4b31-8075-7f210094a6eb"/>
-      </transition>
-      <transition id="node_a5bb3754-b1d4-49ac-989b-d9a9567d023d">
-        <name>
-          <text>insert document</text>
+          <text>begin editing</text>
         </name>
         <toolspecific tool="StochasticPetriNet" version="0.2">
           <property key="distributionType">UNIFORM</property>
           <property key="distributionParameters">0;1</property>
           <property key="priority">0</property>
           <property key="invisible">false</property>
-          <property key="weight">1.1081789</property>
+          <property key="weight">1.6748852</property>
         </toolspecific>
       </transition>
       <transition id="sfl_node_ed28f65a-effc-4160-8648-189c52e82d65">
@@ -183,62 +209,36 @@
           <property key="distributionParameters">0;1</property>
           <property key="priority">0</property>
           <property key="invisible">true</property>
-          <property key="weight">0.9323666</property>
+          <property key="weight">2.3749444</property>
         </toolspecific>
-        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="5fcf47ec-4856-43f8-9e88-b4cbb43a6497"/>
+        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="af550407-aa65-4fea-8299-46b5a5d3a293"/>
       </transition>
-      <transition id="sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da">
-        <name>
-          <text>sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da</text>
-        </name>
-        <toolspecific tool="StochasticPetriNet" version="0.2">
-          <property key="distributionType">UNIFORM</property>
-          <property key="distributionParameters">0;1</property>
-          <property key="priority">0</property>
-          <property key="invisible">true</property>
-          <property key="weight">0.15342003</property>
-        </toolspecific>
-        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="ed45172f-1265-4222-ae7d-6165b6165eb4"/>
-      </transition>
-      <transition id="sfl_node_828f1386-edc8-461d-928b-db841bee9636">
-        <name>
-          <text>sfl_node_828f1386-edc8-461d-928b-db841bee9636</text>
-        </name>
-        <toolspecific tool="StochasticPetriNet" version="0.2">
-          <property key="distributionType">UNIFORM</property>
-          <property key="distributionParameters">0;1</property>
-          <property key="priority">0</property>
-          <property key="invisible">true</property>
-          <property key="weight">0.76790607</property>
-        </toolspecific>
-        <toolspecific tool="ProM" version="6.4" activity="$invisible$" localNodeID="97e4a619-37cf-4ffc-aaca-1bc81b240895"/>
-      </transition>
-      <arc id="2264268515584" source="node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0" target="ent_node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861"/>
-      <arc id="2264268507520" source="ent_node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861" target="node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861"/>
-      <arc id="2264268507408" source="sfl_node_828f1386-edc8-461d-928b-db841bee9636" target="exi_node_66fbc890-3978-4960-bf69-bfd0713308f7"/>
-      <arc id="2264268510992" source="node_9c4bf61d-8540-4169-9839-ab44a583b614" target="exi_node_372001f1-ec64-40e9-90a0-76327bf6ac94"/>
-      <arc id="2264268505616" source="exi_node_66fbc890-3978-4960-bf69-bfd0713308f7" target="node_dad7bafd-8504-442e-a0a6-6ae841522015"/>
-      <arc id="2264268511776" source="sfl_node_3ad5d9db-744d-4f65-98aa-44f949caef36" target="ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857"/>
-      <arc id="2264268515360" source="ent_node_a5bb3754-b1d4-49ac-989b-d9a9567d023d" target="node_a5bb3754-b1d4-49ac-989b-d9a9567d023d"/>
-      <arc id="2264268507296" source="node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861" target="sink"/>
-      <arc id="2264268510768" source="ent_node_9c4bf61d-8540-4169-9839-ab44a583b614" target="node_9c4bf61d-8540-4169-9839-ab44a583b614"/>
-      <arc id="2264268512560" source="exi_node_372001f1-ec64-40e9-90a0-76327bf6ac94" target="sfl_node_3ad5d9db-744d-4f65-98aa-44f949caef36"/>
-      <arc id="2264268507184" source="node_04281c50-fbc3-4bb9-b6de-f780a808e1d5" target="ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857"/>
-      <arc id="2264268505392" source="exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74" target="sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da"/>
-      <arc id="2264268506288" source="node_318db96c-764f-4b38-89ee-0ec27e9a4cf3" target="ent_node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861"/>
-      <arc id="2264268508976" source="node_a5bb3754-b1d4-49ac-989b-d9a9567d023d" target="node_e8240f33-a17e-4112-92a1-8a0cb30b8889"/>
-      <arc id="2264268506064" source="source" target="node_9e66b467-3a85-4958-ba2e-5e2b4a628c2c"/>
-      <arc id="2264268506960" source="exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74" target="sfl_node_828f1386-edc8-461d-928b-db841bee9636"/>
-      <arc id="2264268505168" source="ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857" target="node_318db96c-764f-4b38-89ee-0ec27e9a4cf3"/>
-      <arc id="2264268507856" source="exi_node_372001f1-ec64-40e9-90a0-76327bf6ac94" target="node_04281c50-fbc3-4bb9-b6de-f780a808e1d5"/>
-      <arc id="2264253152992" source="exi_node_66fbc890-3978-4960-bf69-bfd0713308f7" target="sfl_node_ed28f65a-effc-4160-8648-189c52e82d65"/>
-      <arc id="2264268505952" source="node_dad7bafd-8504-442e-a0a6-6ae841522015" target="ent_node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0"/>
-      <arc id="2264268507744" source="node_e8240f33-a17e-4112-92a1-8a0cb30b8889" target="node_318db96c-764f-4b38-89ee-0ec27e9a4cf3"/>
-      <arc id="2264268508640" source="sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da" target="ent_node_9c4bf61d-8540-4169-9839-ab44a583b614"/>
-      <arc id="2264258688880" source="node_9e66b467-3a85-4958-ba2e-5e2b4a628c2c" target="exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74"/>
-      <arc id="2264268512112" source="sfl_node_ed28f65a-effc-4160-8648-189c52e82d65" target="ent_node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0"/>
-      <arc id="2264268521072" source="ent_node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0" target="node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0"/>
-      <arc id="2264268506736" source="sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da" target="ent_node_a5bb3754-b1d4-49ac-989b-d9a9567d023d"/>
+      <arc id="2408288700688" source="ent_node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861" target="node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861"/>
+      <arc id="2408288712336" source="node_04281c50-fbc3-4bb9-b6de-f780a808e1d5" target="ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857"/>
+      <arc id="2408285060496" source="node_e8240f33-a17e-4112-92a1-8a0cb30b8889" target="node_318db96c-764f-4b38-89ee-0ec27e9a4cf3"/>
+      <arc id="2408288712224" source="node_9e66b467-3a85-4958-ba2e-5e2b4a628c2c" target="exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74"/>
+      <arc id="2408288707744" source="exi_node_372001f1-ec64-40e9-90a0-76327bf6ac94" target="sfl_node_3ad5d9db-744d-4f65-98aa-44f949caef36"/>
+      <arc id="2408288714016" source="node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861" target="sink"/>
+      <arc id="2408288705056" source="exi_node_66fbc890-3978-4960-bf69-bfd0713308f7" target="node_dad7bafd-8504-442e-a0a6-6ae841522015"/>
+      <arc id="2408288707632" source="ent_node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0" target="node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0"/>
+      <arc id="2408288699568" source="sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da" target="ent_node_a5bb3754-b1d4-49ac-989b-d9a9567d023d"/>
+      <arc id="2408288708528" source="source" target="node_9e66b467-3a85-4958-ba2e-5e2b4a628c2c"/>
+      <arc id="2408288701360" source="ent_node_9c4bf61d-8540-4169-9839-ab44a583b614" target="node_9c4bf61d-8540-4169-9839-ab44a583b614"/>
+      <arc id="2408288713904" source="node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0" target="ent_node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861"/>
+      <arc id="2408288706736" source="node_dad7bafd-8504-442e-a0a6-6ae841522015" target="ent_node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0"/>
+      <arc id="2408285055792" source="node_318db96c-764f-4b38-89ee-0ec27e9a4cf3" target="ent_node_5ccb82f4-3750-4561-8f4e-b7ea47a3c861"/>
+      <arc id="2408285057584" source="node_a5bb3754-b1d4-49ac-989b-d9a9567d023d" target="node_e8240f33-a17e-4112-92a1-8a0cb30b8889"/>
+      <arc id="2408285051312" source="sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da" target="ent_node_9c4bf61d-8540-4169-9839-ab44a583b614"/>
+      <arc id="2408288712896" source="exi_node_66fbc890-3978-4960-bf69-bfd0713308f7" target="sfl_node_ed28f65a-effc-4160-8648-189c52e82d65"/>
+      <arc id="2408288711104" source="node_9c4bf61d-8540-4169-9839-ab44a583b614" target="exi_node_372001f1-ec64-40e9-90a0-76327bf6ac94"/>
+      <arc id="2408288708416" source="exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74" target="sfl_node_a162f70d-1eae-445c-82f9-6ebe1b7b29da"/>
+      <arc id="2408288714576" source="ent_node_a5bb3754-b1d4-49ac-989b-d9a9567d023d" target="node_a5bb3754-b1d4-49ac-989b-d9a9567d023d"/>
+      <arc id="2408288711888" source="exi_node_3cbe89cf-d189-464c-bb50-6e9382c51f74" target="sfl_node_828f1386-edc8-461d-928b-db841bee9636"/>
+      <arc id="2408288709984" source="sfl_node_ed28f65a-effc-4160-8648-189c52e82d65" target="ent_node_90a5adf6-8aae-445b-bafe-c4e8e0a058c0"/>
+      <arc id="2408288700016" source="sfl_node_828f1386-edc8-461d-928b-db841bee9636" target="exi_node_66fbc890-3978-4960-bf69-bfd0713308f7"/>
+      <arc id="2408288714352" source="sfl_node_3ad5d9db-744d-4f65-98aa-44f949caef36" target="ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857"/>
+      <arc id="2408288699120" source="ent_node_1bbf03ce-edcd-4852-a64c-6edeb8370857" target="node_318db96c-764f-4b38-89ee-0ec27e9a4cf3"/>
+      <arc id="2408285048176" source="exi_node_372001f1-ec64-40e9-90a0-76327bf6ac94" target="node_04281c50-fbc3-4bb9-b6de-f780a808e1d5"/>
     </page>
     <finalmarkings>
       <marking>
